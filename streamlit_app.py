@@ -78,7 +78,7 @@ X = df[selected_features]
 y = df['Success']
 
 # Identify features based on user selection
-num_features = [f for f in selected_features if f in ['Log_Goal', 'Duration', 'Name_length']]
+num_features = [f for f in selected_features if f in ['Log_Goal', 'Duration', 'Name_Length']]
 cat_features = [f for f in selected_features if f in ['Category', 'Subcategory', 'Country']]
 
 # Pipeline for pre-processing numerical features
