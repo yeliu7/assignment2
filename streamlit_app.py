@@ -110,7 +110,7 @@ pipeline = Pipeline(steps=[('preprocessor', preprocessor), ('classifier', model)
 
 # Stratified k-fold cross-validation
 cv = StratifiedKFold(n_splits=5)
-scores = cross_validate(pipeline, X_train, y_train, cv=cv, scoring=['accuracy', 'precision', 'recall', 'f1'])
+scores = cross_validate(pipeline, X, y, cv=cv, scoring=['accuracy', 'precision', 'recall', 'f1'])
 
 # Show the evaluation metrics
 df_scores = pd.DataFrame(scores)
