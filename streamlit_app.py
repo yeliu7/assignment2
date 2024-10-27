@@ -14,7 +14,7 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn import metrics
 
 # Load the data
-df = pd.read_csv('kickstarter_2016.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/yeliu7/assignment2/refs/heads/main/kickstarter_2016.csv')
 df = df[(df['State'] != "Live") & (df['Goal'] > 0)]
 
 # Create new target variable (success)
