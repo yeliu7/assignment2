@@ -14,7 +14,7 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn import metrics
 
 # Load the data
-df = pd.read_csv('https://raw.githubusercontent.com/yeliu7/assignment2/refs/heads/main/kickstarter_2016.csv')
+df = pd.read_csv('kickstarter_2016.csv')
 df = df[(df['State'] != "Live") & (df['Goal'] > 0)]
 
 # Create new target variable (success)
@@ -49,7 +49,7 @@ st.pyplot(fig)
 
 # Choose useful features to predict campaign success and exclude features that
 # are not available at the time of launch
-df = df.drop(['Goal','Launched','Deadline','State','Pledged', 'Backers', 'ID', 'Name'], axis=1)
+df = df.drop(['Goal','Launched','Deadline','State','Pledged', 'Backers', 'ID', 'Name', 'Subcategory'], axis=1)
 
 st.write(df)
 
@@ -62,7 +62,7 @@ classifier_name = st.sidebar.selectbox(
 
 # Sidebar: Feature selection
 st.sidebar.header("Feature Selection")
-all_features = ['Log_Goal', 'Duration', 'Name_Length', 'Category', 'Subcategory','Country']
+all_features = ['Log_Goal', 'Duration', 'Name_Length', 'Category', 'Country']
 selected_features = st.sidebar.multiselect(
     'Select features:',
     all_features,
@@ -79,7 +79,7 @@ y = df['Success']
 
 # Identify features based on user selection
 num_features = [f for f in selected_features if f in ['Log_Goal', 'Duration', 'Name_Length']]
-cat_features = [f for f in selected_features if f in ['Category', 'Subcategory', 'Country']]
+cat_features = [f for f in selected_features if f in ['Category', 'Country']]
 
 # Pipeline for pre-processing numerical features
 # Impute missing values with 0
@@ -121,3 +121,8 @@ st.table(df_scores)
 pipeline.fit(X_train, y_train)
 y_pred = pipeline.predict(X_test)
 
+st.write("### Feature Impact Analysis")
+if len(selected_features) > 1:
+    st.write("Use the sidebar to select features and observe their impact on model performance.")
+else:
+    st.write("Select multiple features to perform feature impact analysis.")
